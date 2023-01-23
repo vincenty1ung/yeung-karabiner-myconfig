@@ -1,0 +1,76 @@
+{
+  "title": "double-click-to-switch-input-method config",
+  "rules": [
+    {
+      "description": "Double click right_command Toggle switch-input-method(Hotkey:f17 [ctrl+spacebar 废弃])",
+      "manipulators": [
+        {
+          "conditions": [
+            {
+              "name": "command_double",
+              "type": "variable_if",
+              "value": 1
+            }
+          ],
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "f17"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "right_command",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "set_variable": {
+                "name": "command_double",
+                "value": 1
+              }
+            },
+            {
+              "key_code": "right_command"
+            }
+          ],
+          "to_delayed_action": {
+            "to_if_canceled": [
+              {
+                "set_variable": {
+                  "name": "command_double",
+                  "value": 0
+                }
+              }
+            ],
+            "to_if_invoked": [
+              {
+                "set_variable": {
+                  "name": "command_double",
+                  "value": 0
+                }
+              }
+            ]
+          },
+          "type": "basic",
+          "parameters": {
+             "basic.to_delayed_action_delay_milliseconds": 200
+          }
+        }
+      ]
+    }
+  ]
+}
